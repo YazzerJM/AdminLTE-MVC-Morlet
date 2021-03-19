@@ -39,6 +39,9 @@
   <link rel="stylesheet" href="views/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <link rel="stylesheet" href="views/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css">
 
+  <!-- iCheck -->
+  <link rel="stylesheet" href="views/plugins/iCheck/all.css">
+
 <!--===========================================--- 
       PLUGINS DE JAVASCRIPT
 ----=========================================== -->
@@ -63,6 +66,9 @@
 
   <!-- SweetAlert2 -->
   <script src="views/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+
+  <!-- iCheck -->
+  <script src="views/plugins/iCheck/icheck.min.js"></script>
 
 </head>
 
@@ -122,5 +128,6 @@
 <script src="views/js/plantilla.js"></script>
 <script src="views/js/usuarios.js"></script>
 <script src="views/js/categorias.js"></script>
+<script src="views/js/productos.js"></script>
 </body>
 </html>
