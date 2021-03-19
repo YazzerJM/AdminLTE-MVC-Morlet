@@ -204,12 +204,38 @@ $(".tablaProductos tbody").on("click", "button.btnEditarProducto", function(){
             $("#editarPrecioVenta").val(respuesta["precio_venta"]);
 
             if(respuesta["imagen"] != ""){
-                $("#imagen_actual").val(respuesta["imagen"]);
+                $("#imagenActual").val(respuesta["imagen"]);
                 $(".previsualizar").attr("src", respuesta["imagen"]);
             }
 
 
         }
 
+    });
+});
+
+
+/*=============================================
+ELIMIAR PRODUCTO
+=============================================*/
+
+$(".tablaProductos tbody").on("click", "button.btnEliminarProducto", function(){
+    var idProducto = $(this).attr("idProducto");
+    var codigo = $(this).attr("codigo");
+    var imagen = $(this).attr("imagen");
+
+    Swal.fire({
+        title: '¿Está seguro de borrar el producto?',
+        text: '¡Si no lo está puede cancelar la acción!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#D81B60',
+        confirmButtonText: 'Si, borrar producto',
+        cancelButtonText: 'Cancelar'
+
+    }).then((result) => {
+        if(result.value){
+            window.location = "index.php?ruta=productos&idProducto="+idProducto+"&codigo="+codigo+"&imagen="+imagen;
+        }
     });
 });

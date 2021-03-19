@@ -146,7 +146,7 @@ class ControladorProductos {
                 =============================================*/
                 $ruta = $_POST["imagenActual"];
                 
-                if(isset($_FILES["editarImagen"]["tmp_name"])){
+                if(isset($_FILES["editarImagen"]["tmp_name"]) && !empty($_FILES["editarImagen"]["tmp_name"])){
 
                     list($ancho, $alto) = getimagesize($_FILES["editarImagen"]["tmp_name"]);
 
@@ -159,7 +159,7 @@ class ControladorProductos {
 
                     $directorio = "views/images/productos/".$_POST["editarCodigo"];
 
-                    if(empty($_POST["imagenActual"]) && $_POST["imagenActual"] != "views/images/productos/default/anonymous.png"){
+                    if(!empty($_POST["imagenActual"]) && $_POST["imagenActual"] != "views/images/productos/default/anonymous.png"){
                         unlink($_POST["imagenActual"]);
                     }else{
                         mkdir($directorio, 0777, true);
@@ -251,6 +251,46 @@ class ControladorProductos {
                     </script>";
             }
         }
+    }
+
+    /*=============================================
+    BORRAR PRODUCTO
+    =============================================*/
+
+    static public function ctrEliminarProducto(){
+
+        if(isset($_GET["idProducto"])){
+
+            $tabla = "productos";
+            $datos = $_GET["idProducto"];
+
+            if($_GET["imagen"] != "" && $_GET["imagen"] != "views/images/productos/default/anonymous.png"){
+
+                unlink($_GET["imagen"]);
+                rmdir('views/images/productos/'.$_GET["codigo"]);
+            }
+
+            $respuesta = ModeloProductos::mdlEliminarProducto($tabla, $datos);
+
+            if($respuesta == "ok"){
+                echo "<script>
+
+                        Swal.fire({
+                            type: 'success',
+                            title: '¡El producto ha sido borrado correctamente!',
+                            icon: 'success',
+                            confirmButtonText: 'Cerrar',
+                            closeOnConfirm: false
+                        }).then((result) => {
+                            if(result.value){
+                                window.location = 'productos';
+                            }
+                        });
+
+                    </script>";
+            }
+        }
+
     }
 
 }
